@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.adoteumpet.entities.Animal;
 
 @Repository
-public interface AnimalRepository extends JpaRepository<Long, Animal> {
+public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
 }

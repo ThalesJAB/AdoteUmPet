@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.adoteumpet.entities.ONG;
 
 @Repository
-public interface ONGRepository extends JpaRepository<Long, ONG>{
+public interface ONGRepository extends JpaRepository<ONG, Long>{
 
 }

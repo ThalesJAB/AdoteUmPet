@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -31,10 +33,13 @@ public class ONG implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
 	private Endereco endereco;
-
+	
+	
+	@OneToMany(mappedBy = "ong")
 	private List<Animal> animais = new ArrayList<>();
 
-	private List<Usuario> usuarioColaboradores = new ArrayList<>();
+	@ManyToMany(mappedBy = "ongsFiliadas")
+	private List<Usuario> usuariosColaboradores = new ArrayList<>();
 
 	private byte[] imagem;
 	private Boolean status;
@@ -135,16 +140,16 @@ public class ONG implements Serializable {
 		return animais;
 	}
 
-	public void setAnimais(List<Animal> animais) {
-		this.animais = animais;
+	public void addAnimais(Animal animal) {
+		this.animais.add(animal);
 	}
 
-	public List<Usuario> getUsuarioColaboradores() {
-		return usuarioColaboradores;
+	public List<Usuario> getUsuariosColaboradores() {
+		return usuariosColaboradores;
 	}
 
-	public void setUsuarioColaboradores(List<Usuario> usuarioColaboradores) {
-		this.usuarioColaboradores = usuarioColaboradores;
+	public void addUsuariosColaboradores(Usuario usuario) {
+		this.usuariosColaboradores.add(usuario);
 	}
 
 	public byte[] getImagem() {

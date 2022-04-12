@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Animal implements Serializable {
@@ -26,15 +28,17 @@ public class Animal implements Serializable {
 	private Boolean adotado;
 	private Boolean status;
 
-	// @JsonIgnore
-	// private ONG ong;
+	
+	@ManyToOne
+	@JoinColumn(name="ong_id")
+	private ONG ong;
 
 	public Animal() {
 
 	}
 
 	public Animal(Long id, String nome, String raca, Integer idade, Double peso, String observacoes, String descricao,
-			byte[] imagem, Boolean adotado, Boolean status) {
+			byte[] imagem, Boolean adotado, Boolean status, ONG ong) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -46,6 +50,7 @@ public class Animal implements Serializable {
 		this.imagem = imagem;
 		this.adotado = adotado;
 		this.status = status;
+		this.ong = ong;
 	}
 
 	public Long getId() {
@@ -128,6 +133,14 @@ public class Animal implements Serializable {
 		this.status = status;
 	}
 
+	public ONG getOng() {
+		return ong;
+	}
+
+	public void setOng(ONG ong) {
+		this.ong = ong;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -145,4 +158,6 @@ public class Animal implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
+
+	
 }

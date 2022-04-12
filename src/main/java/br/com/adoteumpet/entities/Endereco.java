@@ -8,9 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 //import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Endereco implements Serializable {
@@ -26,18 +24,11 @@ public class Endereco implements Serializable {
 	private String cidade;
 	private String estado;
 
-	// @OneToOne
-	// @JoinColumn(name = "usuario_id")
-	@JsonIgnore
-	@OneToOne(mappedBy = "endereco")
-	private Usuario usuario;
-
 	public Endereco() {
 
 	}
 
-	public Endereco(Long id, String cep, String logradouro, String numero, String cidade, String estado,
-			Usuario usuario) {
+	public Endereco(Long id, String cep, String logradouro, String numero, String cidade, String estado) {
 		super();
 		this.id = id;
 		this.cep = cep;
@@ -45,7 +36,6 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 		this.cidade = cidade;
 		this.estado = estado;
-		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -94,14 +84,6 @@ public class Endereco implements Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	@Override
