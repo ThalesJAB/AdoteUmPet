@@ -20,50 +20,58 @@ import br.com.adoteumpet.dtos.UsuarioDTO;
 import br.com.adoteumpet.entities.Usuario;
 import br.com.adoteumpet.services.UsuarioService;
 
-
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioResource {
-	
+
 	@Autowired
 	private UsuarioService service;
-	
+
 	@GetMapping
 	public ResponseEntity<List<UsuarioDTO>> findAll() {
 		List<Usuario> usuarios = service.findAll();
 		List<UsuarioDTO> listDTO = usuarios.stream().map(obj -> new UsuarioDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
-		
+
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Usuario> findById(@PathVariable Long id){
+	public ResponseEntity<Usuario> findById(@PathVariable Long id) {
 		Usuario usuario = service.findById(id);
 		return ResponseEntity.ok().body(usuario);
-		
+
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<Usuario> create(@RequestBody Usuario obj){
+	public ResponseEntity<Usuario> create(@RequestBody Usuario obj) {
 		Usuario usuario = service.create(obj);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(usuario.getId()).toUri();
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(usuario.getId())
+				.toUri();
 		return ResponseEntity.created(uri).body(usuario);
 	}
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario obj){
+	public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario obj) {
 		Usuario usuario = service.update(id, obj);
-		
+
 		return ResponseEntity.ok().body(usuario);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
-		
+
 	}
-	
-	
+
+	@GetMapping(value = "/login")
+	public ResponseEntity<Usuario> login(@RequestBody Usuario obj) {
+		Usuario usuario = service.login(obj);
+		
+		
+		return ResponseEntity.ok().body(usuario);
+
+	}
+
 }

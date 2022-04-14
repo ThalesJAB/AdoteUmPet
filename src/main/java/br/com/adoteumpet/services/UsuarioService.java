@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.adoteumpet.email.EmailMessagesUsuario;
 import br.com.adoteumpet.entities.Usuario;
 import br.com.adoteumpet.repositories.UsuarioRepository;
 import br.com.adoteumpet.services.exceptions.ObjectNotFoundException;
@@ -16,6 +17,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private SendEmailService sendEmailService;
 	
 	public List<Usuario> findAll(){
 		return repository.findAll();
@@ -28,8 +32,13 @@ public class UsuarioService {
 
 	public Usuario create(Usuario obj) {
 		obj.setId(null); 
-		return repository.save(obj);
+		
+		Usuario usuarioNovo = repository.save(obj);
+		
+		this.sendEmailService.send(usuarioNovo.getEmail(), EmailMessagesUsuario.createTitle(usuarioNovo), EmailMessagesUsuario.messageToNewUser(usuarioNovo));
+		return usuarioNovo;
 	}
+	
 
 	public Usuario update(Long id, Usuario obj) {
 		Usuario usuario = findById(id);
@@ -48,6 +57,16 @@ public class UsuarioService {
 		Usuario usuario = findById(id);
 		usuario.setStatus(false);
 		repository.save(usuario);
+	}
+
+	public Usuario login(Usuario obj) {
+		
+		Usuario usuario = repository.login(obj.getLogin(), obj.getSenha());
+		System.out.println(obj.getLogin() + " - " + obj.getSenha());
+		
+		
+		return usuario;
+		
 	}
 	
 
