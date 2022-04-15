@@ -68,8 +68,7 @@ public class UsuarioResource {
 	@GetMapping(value = "/login")
 	public ResponseEntity<Usuario> login(@RequestBody Usuario obj) {
 		Usuario usuario = service.login(obj);
-		
-		
+
 		return ResponseEntity.ok().body(usuario);
 
 	}
