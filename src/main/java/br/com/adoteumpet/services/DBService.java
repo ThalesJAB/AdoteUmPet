@@ -1,6 +1,8 @@
 package br.com.adoteumpet.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,15 +29,19 @@ public class DBService {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	
+	private List<Usuario> listUsuariosTeste = new ArrayList<>();
+	private List<ONG> listONGSTeste = new ArrayList<>();
+
 	public void instanciaBasedeDados() {
 
-		instanciarUsuarios();
 		instanciariOngs();
-		
+		instanciarUsuarios();
+		instUsuarioOngFiliadasBidirecional();
 
 	}
-	//=============================Usuarios Teste==========================================
+
+	// =============================Usuarios
+	// Teste==========================================
 	public void instanciarUsuarios() {
 
 		Usuario usuario1 = new Usuario(null, "thalespro", "1234", "thalesjoseaguiar@gmail.com", "Thales José",
@@ -62,18 +68,21 @@ public class DBService {
 
 		this.usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3));
 
+		this.listUsuariosTeste.addAll(Arrays.asList(usuario1, usuario2, usuario3));
+
 	}
 
-	// ============================ONGS Teste==============================================
+	// ============================ONGS
+	// Teste==============================================
 	public void instanciariOngs() {
 
 		ONG ong1 = new ONG(null, "Roberto X", "ONG amigos dos pets", "32322323323-2323", "amigosdospets@gmail.com",
-				"amigospet", "1234", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque.", null,
+				"amigospet", "1234", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque.", "23232323",null,
 				null, true);
 		ONG ong2 = new ONG(null, "Gilberto Y", "ONG PETzadas", "323234444-5564", "petzadas@gmail.com", "petzada",
-				"1234", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque.", null, null, true);
+				"1234", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque.", "23232323", null, null, true);
 		ONG ong3 = new ONG(null, "Machado Z", "ONG PETlife", "32334455-99084", "petlife@gmail.com", "petlife", "1234",
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque.", null, null, true);
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque.", "23232323", null, null, true);
 
 		Endereco enderecoOng1 = new Endereco(null, "54323-380", "Rua 1", "160", "Olinda", "Pernambuco");
 		Endereco enderecoOng2 = new Endereco(null, "45632-340", "Rua 2", "334", "Olinda", "Pernambuco");
@@ -91,9 +100,34 @@ public class DBService {
 
 		this.ongRepository.saveAll(Arrays.asList(ong1, ong2, ong3));
 
+		this.listONGSTeste.addAll(Arrays.asList(ong1, ong2, ong3));
+
 	}
 
-	// ================================Testes Email====================================================
+	// =============================== USUARIO E ONG MAPEADOS/FILIADOS *MAPEAMENTO
+	// BIDIRECIONAL* ==============================
+
+	private void instUsuarioOngFiliadasBidirecional() {
+
+		for (ONG ong : this.listONGSTeste) {
+			for (Usuario usuario : this.listUsuariosTeste) {
+				usuario.addOngsFiliadas(ong);
+			}
+		}
+		
+		for (Usuario usuario : this.listUsuariosTeste) {
+			for (ONG ong : this.listONGSTeste) {
+				ong.addUsuariosColaboradores(usuario);
+			}
+		}
+		
+		this.usuarioRepository.saveAll(this.listUsuariosTeste);
+		this.ongRepository.saveAll(this.listONGSTeste);
+
+	}
+
+	// ================================Testes
+	// Email====================================================
 
 	public void testeEmailUsuario() {
 

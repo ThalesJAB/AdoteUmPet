@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
+import br.com.adoteumpet.dtos.ONGDTO;
 
 @Entity
 public class Usuario implements Serializable {
@@ -141,8 +144,9 @@ public class Usuario implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public List<ONG> getOngsFiliadas() {
-		return ongsFiliadas;
+	public List<ONGDTO> getOngsFiliadas() {
+		List<ONGDTO> ongsDTO = this.ongsFiliadas.stream().map(obj -> new ONGDTO(obj)).collect(Collectors.toList());
+		return ongsDTO;
 	}
 
 	public void addOngsFiliadas(ONG ong) {

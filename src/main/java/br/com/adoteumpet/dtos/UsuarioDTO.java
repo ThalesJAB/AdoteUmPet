@@ -13,6 +13,7 @@ public class UsuarioDTO implements Serializable {
 	private String email;
 	private String nome;
 	private String telefone;
+
 	
 	public UsuarioDTO() {
 		
@@ -23,6 +24,7 @@ public class UsuarioDTO implements Serializable {
 		this.email = obj.getEmail();
 		this.nome = obj.getNome();
 		this.telefone = obj.getTelefone();
+	
 	}
 
 	public Long getId() {

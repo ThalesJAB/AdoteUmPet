@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import br.com.adoteumpet.dtos.UsuarioDTO;
+
 @Entity
+
 public class ONG implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,12 +33,12 @@ public class ONG implements Serializable {
 	private String login;
 	private String senha;
 	private String biografia;
+	private String telefone;
 
 	@OneToOne
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
 	private Endereco endereco;
-	
-	
+
 	@OneToMany(mappedBy = "ong")
 	private List<Animal> animais = new ArrayList<>();
 
@@ -49,7 +53,7 @@ public class ONG implements Serializable {
 	}
 
 	public ONG(Long id, String razaoSocial, String nomeFantasia, String cnpj, String email, String login, String senha,
-			String biografia, Endereco endereco, byte[] imagem, Boolean status) {
+			String biografia, String telefone, Endereco endereco, byte[] imagem, Boolean status) {
 		super();
 		this.id = id;
 		this.razaoSocial = razaoSocial;
@@ -59,10 +63,13 @@ public class ONG implements Serializable {
 		this.login = login;
 		this.senha = senha;
 		this.biografia = biografia;
+		this.telefone = telefone;
 		this.endereco = endereco;
 		this.imagem = imagem;
 		this.status = status;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -127,6 +134,14 @@ public class ONG implements Serializable {
 	public void setBiografia(String biografia) {
 		this.biografia = biografia;
 	}
+	
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
 	public Endereco getEndereco() {
 		return endereco;
@@ -144,13 +159,15 @@ public class ONG implements Serializable {
 		this.animais.add(animal);
 	}
 
-	public List<Usuario> getUsuariosColaboradores() {
-		return usuariosColaboradores;
+	public List<UsuarioDTO> getUsuariosColaboradores() {
+		List<UsuarioDTO> usuariosDTO = this.usuariosColaboradores.stream().map(obj -> new UsuarioDTO(obj)).collect(Collectors.toList());
+		return usuariosDTO;
 	}
 
 	public void addUsuariosColaboradores(Usuario usuario) {
 		this.usuariosColaboradores.add(usuario);
 	}
+	
 
 	public byte[] getImagem() {
 		return imagem;
