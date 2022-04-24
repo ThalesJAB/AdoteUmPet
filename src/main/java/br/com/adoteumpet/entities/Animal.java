@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import br.com.adoteumpet.dtos.ONGDTO;
+
 @Entity
 public class Animal implements Serializable {
 
@@ -133,8 +135,9 @@ public class Animal implements Serializable {
 		this.status = status;
 	}
 
-	public ONG getOng() {
-		return ong;
+	public ONGDTO getOng() {
+		ONGDTO ongDto = new ONGDTO(this.ong);
+		return ongDto;
 	}
 
 	public void setOng(ONG ong) {

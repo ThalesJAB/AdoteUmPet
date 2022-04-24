@@ -7,9 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.adoteumpet.entities.Animal;
 import br.com.adoteumpet.entities.Endereco;
 import br.com.adoteumpet.entities.ONG;
 import br.com.adoteumpet.entities.Usuario;
+import br.com.adoteumpet.repositories.AnimalRepository;
 import br.com.adoteumpet.repositories.EnderecoRepository;
 import br.com.adoteumpet.repositories.ONGRepository;
 import br.com.adoteumpet.repositories.UsuarioRepository;
@@ -25,6 +27,9 @@ public class DBService {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private AnimalRepository animalRepository;
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -37,7 +42,19 @@ public class DBService {
 		instanciariOngs();
 		instanciarUsuarios();
 		instUsuarioOngFiliadasBidirecional();
+		instanciarAnimais();
 
+	}
+
+	private void instanciarAnimais() {
+		ONG ong = this.listONGSTeste.get(0);
+		Animal animal1 = new Animal(null, "Lulu", "Viralata", 5, 8.2, "Um pouco arisca", "Lorem ipsum dolor sit amet", null, false, true, ong );
+		Animal animal2 = new Animal(null, "Bilulu", "Viralata", 3, 5.3, "Bem dócil", "Lorem ipsum dolor sit amet", null, false, true, ong );
+		Animal animal3 = new Animal(null, "Neguinho", "Viralata", 7, 10.0, "Senhorzinho", "Lorem ipsum dolor sit amet", null, false, true, ong );
+		//Animal animal1 = new Animal(null, "Lulu", "Viralata", 5, 78.3, "Um pouco arisca", "Lorem ipsum dolor sit amet", null, false, true, ong );
+		this.animalRepository.saveAll(Arrays.asList(animal1, animal2, animal3));
+		
+		
 	}
 
 	// =============================Usuarios
