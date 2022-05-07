@@ -72,6 +72,8 @@ public class DBService {
 				"Pernambuco");
 		Endereco endereco2 = new Endereco(null, "53244-340", "Rua do Galeto", "334", "Olinda", "Pernambuco");
 		Endereco endereco3 = new Endereco(null, "51383-675", "Rua da Nordibe", "424", "Olinda", "Pernambuco");
+		
+		System.out.println("============================================== Instanciou =================================================");
 
 		this.usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3));
 
@@ -86,6 +88,8 @@ public class DBService {
 		this.usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3));
 
 		this.listUsuariosTeste.addAll(Arrays.asList(usuario1, usuario2, usuario3));
+		System.out.println("============================================== Passou =================================================");
+
 
 	}
 
