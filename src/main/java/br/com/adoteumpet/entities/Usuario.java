@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import br.com.adoteumpet.dtos.ONGDTO;
@@ -38,9 +39,16 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
 	private Endereco endereco;
 
+	
 	@ManyToMany
-	@JoinTable(name = "usuario_ong", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "ong_id"))
-	private List<ONG> ongsFiliadas = new ArrayList<>();
+	@JoinTable(name = "ongs_favoritas_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "ong_id"))
+	private List<ONG> ongsFavoritas = new ArrayList<>();
+	
+
+	@OneToMany(mappedBy = "usuario")
+	private List<PlanoUsuarioFiliado> planosUsuario = new ArrayList<>();
+	
+	
 
 	private Boolean status;
 
@@ -143,14 +151,22 @@ public class Usuario implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
-	public List<ONGDTO> getOngsFiliadas() {
-		List<ONGDTO> ongsDTO = this.ongsFiliadas.stream().map(obj -> new ONGDTO(obj)).collect(Collectors.toList());
+	
+	public List<ONGDTO> getOngsFavoritas() {
+		List<ONGDTO> ongsDTO = this.ongsFavoritas.stream().map(obj -> new ONGDTO(obj)).collect(Collectors.toList());
 		return ongsDTO;
 	}
+	
+	public void addOngsFavoritas(ONG ong) {
+		this.ongsFavoritas.add(ong);
+	}
 
-	public void addOngsFiliadas(ONG ong) {
-		this.ongsFiliadas.add(ong);
+	public List<PlanoUsuarioFiliado> getPlanosUsuario() {
+		return this.planosUsuario;
+	}
+
+	public void addPlanosUsuario(PlanoUsuarioFiliado ongFiliada) {
+		this.planosUsuario.add(ongFiliada);
 	}
 
 	public Boolean getStatus() {

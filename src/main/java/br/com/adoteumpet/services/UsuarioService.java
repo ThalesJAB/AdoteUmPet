@@ -54,10 +54,10 @@ public class UsuarioService {
 		usuario.setTelefone(obj.getTelefone());
 		usuario.setEndereco(obj.getEndereco());
 
-		organizarOngs(usuario, obj.getOngsFiliadas());
+		organizarOngs(usuario, obj.getOngsFavoritas());
 	
 		System.out.println("=============== DALE DALE =====================");
-		usuario.getOngsFiliadas().forEach(System.out::println);
+		//usuario.getOngsFiliadas().forEach(System.out::println);
 		return repository.save(usuario);
 		
 	}
@@ -83,7 +83,7 @@ public class UsuarioService {
 		boolean possui = false;
 		for (ONGDTO ongObjJson : ongsJson) {
 
-			for (ONGDTO ongUsuario : usuario.getOngsFiliadas()) {
+			for (ONGDTO ongUsuario : usuario.getOngsFavoritas()) {
 
 				if (ongUsuario.equals(ongObjJson)) {
 					possui = true;
@@ -114,7 +114,7 @@ public class UsuarioService {
 			ong.setImagem(ongObjNew.getImagem());
 			ong.setStatus(ongObjNew.getStatus());
 
-			usuario.addOngsFiliadas(ong);
+			usuario.addOngsFavoritas(ong);
 		}
 	}
 

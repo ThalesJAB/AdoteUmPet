@@ -1,5 +1,6 @@
 package br.com.adoteumpet.services;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,10 +11,12 @@ import org.springframework.stereotype.Service;
 import br.com.adoteumpet.entities.Animal;
 import br.com.adoteumpet.entities.Endereco;
 import br.com.adoteumpet.entities.ONG;
+import br.com.adoteumpet.entities.PlanoUsuarioFiliado;
 import br.com.adoteumpet.entities.Usuario;
 import br.com.adoteumpet.repositories.AnimalRepository;
 import br.com.adoteumpet.repositories.EnderecoRepository;
 import br.com.adoteumpet.repositories.ONGRepository;
+import br.com.adoteumpet.repositories.PlanoUsuarioFiliadoRepository;
 import br.com.adoteumpet.repositories.UsuarioRepository;
 
 @Service
@@ -30,6 +33,9 @@ public class DBService {
 	
 	@Autowired
 	private AnimalRepository animalRepository;
+	
+	@Autowired
+	private PlanoUsuarioFiliadoRepository usuarioFiliadoRepository;
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -43,6 +49,7 @@ public class DBService {
 		instanciarUsuarios();
 		instUsuarioOngFiliadasBidirecional();
 		instanciarAnimais();
+		
 
 	}
 
@@ -129,6 +136,7 @@ public class DBService {
 	// BIDIRECIONAL* ==============================
 
 	private void instUsuarioOngFiliadasBidirecional() {
+		/*
 
 		for (ONG ong : this.listONGSTeste) {
 			for (Usuario usuario : this.listUsuariosTeste) {
@@ -144,6 +152,30 @@ public class DBService {
 		
 		this.usuarioRepository.saveAll(this.listUsuariosTeste);
 		this.ongRepository.saveAll(this.listONGSTeste);
+		
+		*/
+		
+		Usuario usuario = this.listUsuariosTeste.get(0);
+		Usuario usuario2 = this.listUsuariosTeste.get(1);
+		ONG ong = this.listONGSTeste.get(0);
+		ONG ong2 = this.listONGSTeste.get(1);
+		
+		PlanoUsuarioFiliado ongFiliada = new PlanoUsuarioFiliado(null, ong, usuario, Instant.now(), 50.0, 5, true);
+		PlanoUsuarioFiliado ongFiliada2 = new PlanoUsuarioFiliado(null, ong2, usuario, Instant.now(), 78.0, 5, true);
+		PlanoUsuarioFiliado ongFiliada3 = new PlanoUsuarioFiliado(null, ong2, usuario2, Instant.now(), 100.0, 3, true);
+		this.usuarioFiliadoRepository.save(ongFiliada);
+		this.usuarioFiliadoRepository.save(ongFiliada2);
+		this.usuarioFiliadoRepository.save(ongFiliada3);
+		
+		
+//		usuario.addOngsFiliadas(ongFiliada);
+//		
+//
+		//this.usuarioRepository.save(usuario);
+		//this.ongRepository.save(ong);
+		
+		
+		System.out.println("Protno");
 
 	}
 

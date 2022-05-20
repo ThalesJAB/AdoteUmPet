@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -41,9 +42,13 @@ public class ONG implements Serializable {
 
 	@OneToMany(mappedBy = "ong")
 	private List<Animal> animais = new ArrayList<>();
+	
+	
+	@OneToMany(mappedBy = "ong")
+	private List<PlanoUsuarioFiliado> listUsuariosFiliados = new ArrayList<>();
 
-	@ManyToMany(mappedBy = "ongsFiliadas")
-	private List<Usuario> usuariosColaboradores = new ArrayList<>();
+	
+
 
 	private byte[] imagem;
 	private Boolean status;
@@ -158,16 +163,11 @@ public class ONG implements Serializable {
 	public void addAnimais(Animal animal) {
 		this.animais.add(animal);
 	}
-
-	public List<UsuarioDTO> getUsuariosColaboradores() {
-		List<UsuarioDTO> usuariosDTO = this.usuariosColaboradores.stream().map(obj -> new UsuarioDTO(obj)).collect(Collectors.toList());
-		return usuariosDTO;
-	}
-
-	public void addUsuariosColaboradores(Usuario usuario) {
-		this.usuariosColaboradores.add(usuario);
-	}
 	
+	public List<PlanoUsuarioFiliado> getListUsuariosFiliados() {
+		return listUsuariosFiliados;
+	}
+
 
 	public byte[] getImagem() {
 		return imagem;
