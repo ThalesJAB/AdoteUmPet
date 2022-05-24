@@ -200,9 +200,9 @@ public class DBService {
 //		Usuario usuario3 = new Usuario(null, "georghitonzin", "1234", "georghiton@gmail.com", "Georghiton da Silva",
 //				"2423435", "(81)96455-3435", "minha vida é assim", null, null, true);
 
-		usuarioService.create(usuario1);
-		usuarioService.create(usuario2);
-		usuarioService.create(usuario3);
+//		usuarioService.create(usuario1);
+//		usuarioService.create(usuario2);
+//		usuarioService.create(usuario3);
 
 	}
 

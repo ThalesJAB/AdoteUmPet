@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
 	private String cpf;
 	private String telefone;
 	private String biografia;
-	private byte[] imagem;
+	private String imagem;
 
 	@OneToOne
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
@@ -57,7 +57,7 @@ public class Usuario implements Serializable {
 	}
 
 	public Usuario(Long id, String login, String senha, String email, String nome, String cpf, String telefone,
-			String biografia, byte[] imagem, Endereco endereco, Boolean status) {
+			String biografia, String imagem, Endereco endereco, Boolean status) {
 		super();
 		this.id = id;
 		this.login = login;
@@ -136,11 +136,11 @@ public class Usuario implements Serializable {
 		this.biografia = biografia;
 	}
 
-	public byte[] getImagem() {
+	public String getImagem() {
 		return imagem;
 	}
 
-	public void setImagem(byte[] imagem) {
+	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
 

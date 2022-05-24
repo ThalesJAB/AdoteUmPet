@@ -1,11 +1,13 @@
 package br.com.adoteumpet.services;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.adoteumpet.dtos.ONGDTO;
 import br.com.adoteumpet.email.EmailMessagesUsuario;
@@ -13,6 +15,7 @@ import br.com.adoteumpet.entities.ONG;
 import br.com.adoteumpet.entities.Usuario;
 import br.com.adoteumpet.repositories.UsuarioRepository;
 import br.com.adoteumpet.services.exceptions.ObjectNotFoundException;
+import br.com.adoteumpet.storage.s3.FotoStorageS3;
 
 @Service
 public class UsuarioService {
@@ -25,6 +28,9 @@ public class UsuarioService {
 
 	@Autowired
 	private SendEmailService sendEmailService;
+	
+	@Autowired
+	private FotoStorageS3 fotoStorage;
 
 	public List<Usuario> findAll() {
 		return repository.findAll();
@@ -37,10 +43,16 @@ public class UsuarioService {
 
 	public Usuario create(Usuario obj) {
 		obj.setId(null);
+		
 
 		Usuario usuarioNovo = repository.save(obj);
+		
+		
 
 		//this.sendEmailService.send(usuarioNovo.getEmail(), EmailMessagesUsuario.createTitle(usuarioNovo), EmailMessagesUsuario.messageToNewUser(usuarioNovo));
+		
+		
+		
 		return usuarioNovo;
 	}
 
@@ -76,6 +88,9 @@ public class UsuarioService {
 		return usuario;
 
 	}
+	
+	
+	
 	
 	
 	private void organizarOngs(Usuario usuario, List<ONGDTO> ongsJson) {
