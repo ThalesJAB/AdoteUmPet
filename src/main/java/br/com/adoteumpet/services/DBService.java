@@ -160,9 +160,11 @@ public class DBService {
 		ONG ong = this.listONGSTeste.get(0);
 		ONG ong2 = this.listONGSTeste.get(1);
 		
-		PlanoUsuarioFiliado ongFiliada = new PlanoUsuarioFiliado(null, ong, usuario, Instant.now(), 50.0, 5, true);
-		PlanoUsuarioFiliado ongFiliada2 = new PlanoUsuarioFiliado(null, ong2, usuario, Instant.now(), 78.0, 5, true);
-		PlanoUsuarioFiliado ongFiliada3 = new PlanoUsuarioFiliado(null, ong2, usuario2, Instant.now(), 100.0, 3, true);
+		PlanoUsuarioFiliado ongFiliada = new PlanoUsuarioFiliado(null, ong, usuario, String.valueOf(Instant.now()), 50.0, 5, true);
+		PlanoUsuarioFiliado ongFiliada2 = new PlanoUsuarioFiliado(null, ong2, usuario,  String.valueOf(Instant.now()), 78.0, 5, true);
+		PlanoUsuarioFiliado ongFiliada3 = new PlanoUsuarioFiliado(null, ong2, usuario2,  String.valueOf(Instant.now()), 100.0, 3, true);
+		System.out.println("=====================================================================================\n====================");
+		System.out.println(String.valueOf(Instant.now()));
 		this.usuarioFiliadoRepository.save(ongFiliada);
 		this.usuarioFiliadoRepository.save(ongFiliada2);
 		this.usuarioFiliadoRepository.save(ongFiliada3);

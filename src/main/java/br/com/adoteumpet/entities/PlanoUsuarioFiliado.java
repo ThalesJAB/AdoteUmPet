@@ -34,7 +34,7 @@ public class PlanoUsuarioFiliado implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-	private Instant data;
+	private String data;
 	private Double valor;
 	private Integer tempo;
 	private Boolean status;
@@ -43,7 +43,7 @@ public class PlanoUsuarioFiliado implements Serializable {
 
 	}
 
-	public PlanoUsuarioFiliado(Integer id, ONG ong, Usuario usuario, Instant data, Double valor, Integer tempo, Boolean status) {
+	public PlanoUsuarioFiliado(Integer id, ONG ong, Usuario usuario, String data, Double valor, Integer tempo, Boolean status) {
 		super();
 		this.id = id;
 		this.ong = ong;
@@ -79,11 +79,11 @@ public class PlanoUsuarioFiliado implements Serializable {
 		this.ong = ong;
 	}
 
-	public Instant getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Instant data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
