@@ -55,9 +55,9 @@ public class DBService {
 
 	private void instanciarAnimais() {
 		ONG ong = this.listONGSTeste.get(0);
-		Animal animal1 = new Animal(null, "Lulu", "Viralata", 5, 8.2, "Um pouco arisca", "Lorem ipsum dolor sit amet", null, false, true, ong );
-		Animal animal2 = new Animal(null, "Bilulu", "Viralata", 3, 5.3, "Bem dócil", "Lorem ipsum dolor sit amet", null, false, true, ong );
-		Animal animal3 = new Animal(null, "Neguinho", "Viralata", 7, 10.0, "Senhorzinho", "Lorem ipsum dolor sit amet", null, false, true, ong );
+		Animal animal1 = new Animal(null, "Lulu", "Viralata","Fêmea", 5, 8.2, "Um pouco arisca", "Lorem ipsum dolor sit amet", null, false, true, ong );
+		Animal animal2 = new Animal(null, "Zeus", "Viralata","Macho", 3, 5.3, "Bem dócil", "Lorem ipsum dolor sit amet", null, false, true, ong );
+		Animal animal3 = new Animal(null, "Mel", "Viralata","Fêmea", 7, 10.0, "Velha senhora", "Lorem ipsum dolor sit amet", null, false, true, ong );
 		//Animal animal1 = new Animal(null, "Lulu", "Viralata", 5, 78.3, "Um pouco arisca", "Lorem ipsum dolor sit amet", null, false, true, ong );
 		this.animalRepository.saveAll(Arrays.asList(animal1, animal2, animal3));
 		
@@ -69,16 +69,16 @@ public class DBService {
 	public void instanciarUsuarios() {
 
 		Usuario usuario1 = new Usuario(null, "thalespro", "1234", "thalesjoseaguiar@gmail.com", "Thales José",
-				"232323232324", "(81)98694-8019", "minha vida é assim", null, null, true);
+				"411.787.410-10", "(81)98694-8019", "minha vida é assim", null, null, true);
 		Usuario usuario2 = new Usuario(null, "xbeliscao", "1234", "otavio.silva@aluno.uniaeso.edu.br", "Otavio Augusto",
-				"89238923", "(81)93233-4423", "minha vida é assim", null, null, true);
+				"956.452.770-82", "(81)93233-4423", "minha vida é assim", null, null, true);
 		Usuario usuario3 = new Usuario(null, "edvaldoprogamer", "1234", "edvaldo.santana@aluno.uniaeso.edu.br",
-				"Edvaldo Junior", "2423435", "(81)96455-3435", "minha vida é assim", null, null, true);
+				"Edvaldo Junior", "686.524.350-14", "(81)96455-3435", "minha vida é assim", null, null, true);
 
-		Endereco endereco1 = new Endereco(null, "53260-380", "Rua Débora Regis de Carvalho", "160", "Olinda",
+		Endereco endereco1 = new Endereco(null, "53260-380", "Rua Débora Regis de Carvalho", "160","Peixinhos", "Olinda",
 				"Pernambuco");
-		Endereco endereco2 = new Endereco(null, "53244-340", "Rua do Galeto", "334", "Olinda", "Pernambuco");
-		Endereco endereco3 = new Endereco(null, "51383-675", "Rua da Nordibe", "424", "Olinda", "Pernambuco");
+		Endereco endereco2 = new Endereco(null, "53244-340", "Rua do Galeto", "334", "Peixinhos", "Olinda", "Pernambuco");
+		Endereco endereco3 = new Endereco(null, "51383-675", "Rua da Nordibe", "424", "Peixinhos", "Olinda", "Pernambuco");
 		
 		System.out.println("============================================== Instanciou =================================================");
 
@@ -104,17 +104,17 @@ public class DBService {
 	// Teste==============================================
 	public void instanciariOngs() {
 
-		ONG ong1 = new ONG(null, "Roberto X", "ONG amigos dos pets", "32322323323-2323", "amigosdospets@gmail.com",
+		ONG ong1 = new ONG(null, "Roberto X", "ONG amigos dos pets", "78.372.123/0001-40", "amigosdospets@gmail.com",
 				"amigospet", "1234", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque.", "23232323",null,
 				null, true);
-		ONG ong2 = new ONG(null, "Gilberto Y", "ONG PETzadas", "323234444-5564", "petzadas@gmail.com", "petzada",
+		ONG ong2 = new ONG(null, "Gilberto Y", "ONG PETzadas", "22.334.415/0001-34", "petzadas@gmail.com", "petzada",
 				"1234", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque.", "23232323", null, null, true);
-		ONG ong3 = new ONG(null, "Machado Z", "ONG PETlife", "32334455-99084", "petlife@gmail.com", "petlife", "1234",
+		ONG ong3 = new ONG(null, "Machado Z", "ONG PETlife", "36.623.180/0001-05", "petlife@gmail.com", "petlife", "1234",
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque.", "23232323", null, null, true);
 
-		Endereco enderecoOng1 = new Endereco(null, "54323-380", "Rua 1", "160", "Olinda", "Pernambuco");
-		Endereco enderecoOng2 = new Endereco(null, "45632-340", "Rua 2", "334", "Olinda", "Pernambuco");
-		Endereco enderecoOng3 = new Endereco(null, "45664-675", "Rua 3", "424", "Olinda", "Pernambuco");
+		Endereco enderecoOng1 = new Endereco(null, "54323-380", "Rua 1", "160", "Peixinhos", "Olinda",  "Pernambuco");
+		Endereco enderecoOng2 = new Endereco(null, "45632-340", "Rua 2", "334", "Peixinhos","Olinda", "Pernambuco");
+		Endereco enderecoOng3 = new Endereco(null, "45664-675", "Rua 3", "424", "Peixinhos","Olinda", "Pernambuco");
 
 		this.ongRepository.saveAll(Arrays.asList(ong1, ong2, ong3));
 

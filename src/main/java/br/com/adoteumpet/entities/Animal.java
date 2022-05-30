@@ -22,6 +22,7 @@ public class Animal implements Serializable {
 	private Long id;
 	private String nome;
 	private String raca;
+	private String genero;
 	private Integer idade;
 	private Double peso;
 	private String observacoes;
@@ -39,12 +40,13 @@ public class Animal implements Serializable {
 
 	}
 
-	public Animal(Long id, String nome, String raca, Integer idade, Double peso, String observacoes, String descricao,
+	public Animal(Long id, String nome, String raca, String genero, Integer idade, Double peso, String observacoes, String descricao,
 			byte[] imagem, Boolean adotado, Boolean status, ONG ong) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.raca = raca;
+		this.genero = genero;
 		this.idade = idade;
 		this.peso = peso;
 		this.observacoes = observacoes;
@@ -77,6 +79,14 @@ public class Animal implements Serializable {
 
 	public void setRaca(String raca) {
 		this.raca = raca;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 
 	public Integer getIdade() {
